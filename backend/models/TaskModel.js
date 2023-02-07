@@ -11,8 +11,8 @@ const TaskSchema = new mongoose.Schema(
       required: true,
     },
     status: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "StatusModel",
     },
     due_date: {
       type: Date,

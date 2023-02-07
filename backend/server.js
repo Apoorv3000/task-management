@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 
+import statusRoutes from "./routes/statusRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+
 dotenv.config();
 
 const app = express();
@@ -27,6 +30,10 @@ mongoose.set("strictQuery", true);
 
 // port
 const port = process.env.PORT || 5001;
+
+//routes
+app.use("/api/status", statusRoutes);
+app.use("/api/category", categoryRoutes);
 
 // middlewares
 
