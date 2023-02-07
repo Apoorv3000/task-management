@@ -6,6 +6,8 @@ import mongoose from "mongoose";
 
 import statusRoutes from "./routes/statusRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import taskRoutes from "./routes/taskRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -34,6 +36,8 @@ const port = process.env.PORT || 5001;
 //routes
 app.use("/api/status", statusRoutes);
 app.use("/api/category", categoryRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/users", userRoutes);
 
 // middlewares
 
