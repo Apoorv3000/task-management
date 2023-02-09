@@ -16,10 +16,10 @@ router.route("/register").post(registerUser);
 
 router.route("/login").post(loginUser);
 
-router.route("/logout").get(verifyUser, logoutUser);
+router.route("/logout").get(logoutUser);
 
-router.route("/").get(verifyUser, getAllUsers);
+router.route("/").get(getAllUsers);
 
-router.route("/:id").get(verifyUser, getUser).delete(verifyUser, deleteUser);
+router.route("/:id").get(getUser).delete(verifyUser, deleteUser);
 
 export default router;

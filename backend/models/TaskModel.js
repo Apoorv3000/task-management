@@ -10,13 +10,12 @@ const TaskSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
+    column: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "StatusModel",
     },
     due_date: {
       type: Date,
-      required: true,
     },
 
     priority: {

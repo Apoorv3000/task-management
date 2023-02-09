@@ -1,11 +1,7 @@
 import mongoose from "mongoose";
 
 const StatusSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
+  title: {
     type: String,
     required: true,
   },

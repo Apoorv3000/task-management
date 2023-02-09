@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 import statusRoutes from "./routes/statusRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
@@ -26,6 +27,13 @@ const connect = () => {
     });
 };
 
+// middlewares
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.json());
+app.use(cors());
 //remove the mongoose warning
 
 mongoose.set("strictQuery", true);
@@ -39,11 +47,10 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
 
-// middlewares
-
-app.use(cookieParser());
-app.use(express.json());
-app.use(cors());
+// base api
+app.get("/", (req, res) => {
+  res.json("Hello");
+});
 
 //error handling
 

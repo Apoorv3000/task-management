@@ -42,9 +42,21 @@ export const getTasksByCategories = async (req, res, next) => {
 
 export const getTaskByStatus = async (req, res, next) => {
   try {
-    const status = req.params.status;
+    const column = req.params.column;
 
-    const tasks = await TaskModel.find({ status });
+    const tasks = await TaskModel.find({ column });
+    if (!tasks) {
+      return next(createError(404, "Task with given status not found"));
+    }
+    return res.status(200).json(tasks);
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getAllTasks = async (req, res, next) => {
+  try {
+    const tasks = await TaskModel.find();
     if (!tasks) {
       return next(createError(404, "Task with given status not found"));
     }
@@ -58,11 +70,11 @@ export const getTaskByStatus = async (req, res, next) => {
 export const updateStatusOfTask = async (req, res, next) => {
   try {
     const taskId = req.params.id;
-    const status = req.body.status;
+    const column = req.body.column;
     const task = await TaskModel.findById(taskId);
     if (!task) return next(createError(404, "Task not found"));
 
-    task.status = status;
+    task.column = column;
     await task.save();
 
     return res.status(200).send("Task status updated successfully");

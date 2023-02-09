@@ -3,6 +3,7 @@ import {
   assignTaskToUser,
   CreateTask,
   deletedTask,
+  getAllTasks,
   getTask,
   getTaskByStatus,
   getTasksByCategories,
@@ -14,21 +15,21 @@ import { verifyUser } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-router.route("/").post(verifyUser, CreateTask);
+router.route("/").post(CreateTask).get(getAllTasks);
 
-router.route("/:status").get(verifyUser, getTaskByStatus);
+router.route("/:column").get(getTaskByStatus);
 
-router.route("/search").get(verifyUser, getTasksByCategories);
+router.route("/search").get(getTasksByCategories);
 
 router
   .route("/:id")
-  .get(verifyUser, getTask)
-  .patch(verifyUser, updateTask)
-  .delete(verifyUser, deletedTask)
-  .patch(verifyUser, setPriorityOfTask);
+  .get(getTask)
+  .patch(updateTask)
+  .delete(deletedTask)
+  .patch(setPriorityOfTask);
 
-router.route("/:id/assign").put(verifyUser, assignTaskToUser);
+router.route("/:id/assign").put(assignTaskToUser);
 
-router.route("/:id/status").put(verifyUser, updateStatusOfTask);
+router.route("/:id/status").put(updateStatusOfTask);
 
 export default router;

@@ -8,11 +8,8 @@ import { verifyUser } from "../middlewares/verifyToken.js";
 
 const router = express.Router();
 
-router
-  .route("/")
-  .post(verifyUser, CreateCategory)
-  .get(verifyUser, getAllCategories);
+router.route("/").post(CreateCategory).get(getAllCategories);
 
-router.route("/:id").delete(verifyUser, deleteCategory);
+router.route("/:id").delete(deleteCategory);
 
 export default router;
